@@ -3,6 +3,14 @@
 import telnetlib
 import time
 
+
+def send_cmd(remote_conn, cmd):
+    cmd=cmd.rstrip()
+    remote_conn.write(cmd+"\n")
+    time.sleep(1)
+    return remote_conn.read_very_eager()    
+     
+
 def main():
     print 'hello'
     ip = '50.76.53.27'
@@ -15,14 +23,9 @@ def main():
     remote_conn.write(user+'\n')
     op = remote_conn.read_until('password:', ttimeout)
     remote_conn.write(password+'\n' )
-    time.sleep(1)
-    remote_conn.write('term len 0\n')
-    op = remote_conn.read_very_eager()    
-    remote_conn.write('show version\n' )
-    
-    time.sleep(1)
-    op = remote_conn.read_very_eager()    
 
+    op=send_cmd(remote_conn,'term len 0')
+    op=send_cmd(remote_conn,'show ver')    
     print op
     remote_conn.close()
 
