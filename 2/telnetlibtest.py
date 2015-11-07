@@ -15,6 +15,10 @@ def main():
     remote_conn.write(user+'\n')
     op = remote_conn.read_until('password:', ttimeout)
     remote_conn.write(password+'\n' )
+    time.sleep(1)
+    remote_conn.write('term len 0\n')
+    op = remote_conn.read_very_eager()    
+    remote_conn.write('show version\n' )
     
     time.sleep(1)
     op = remote_conn.read_very_eager()    
