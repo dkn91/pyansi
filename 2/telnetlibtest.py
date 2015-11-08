@@ -10,6 +10,7 @@ ttimeout = 6
 
 def send_cmd(remote_conn, cmd):
     cmd=cmd.rstrip()
+    print cmd
     remote_conn.write(cmd+"\n")
     time.sleep(1)
     return remote_conn.read_very_eager()    
@@ -25,7 +26,6 @@ def telnet_connect(ip):
         return telnetlib.Telnet(ip, tport, ttimeout)
     except socket.error:
         sys.exit('Connection timedout')
-
  
 def main():
     ip = '50.76.53.27'
@@ -36,10 +36,20 @@ def main():
     login(remote_conn, user, password)
 
     op=send_cmd(remote_conn,'term len 0')
-    op=send_cmd(remote_conn,'show ver')    
+    op=send_cmd(remote_conn,'show inter desc')    
+    print op
+    op=send_cmd(remote_conn,'config') 
+    print op
+    send_cmd(remote_conn,'')
+    send_cmd(remote_conn,'interface loopback 99')    
+    op =send_cmd(remote_conn,"description created_by_deepak")    
+    print op
+    op=send_cmd(remote_conn,'exit')    
+    print op
+    send_cmd(remote_conn,'exit')    
+    op=send_cmd(remote_conn,'show inter desc')    
     print op
     remote_conn.close()
-
 
 if __name__ == '__main__':
     main()
