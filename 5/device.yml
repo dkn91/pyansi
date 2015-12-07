@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  vars:
+    hostname: pynet-rtr1
+  tasks:
+    - name: Gen config
+      template: src=/home/deepakpishe/deepak/5/rtr1.j2
+                  dest=/home/deepakpishe/deepak/rtr1.txt
+    - name: Gen config
+      template: src=/home/deepakpishe/deepak/5/rtr1.j2
+                  dest=/home/deepakpishe/deepak/rtr1.txt
