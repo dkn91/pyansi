@@ -1,0 +1,8 @@
+ORM - operation resource management
+db for scripting languages like python. it acts like a middleman for reading from the underlying db's that can b anything (sql, mongodb, etc)
+
+install django
+create django project
+create django app
+insall django settings file
+add env var for django setttig and pythonpath
